@@ -158,7 +158,7 @@ class AccountInvoice(models.Model):
         super(AccountInvoice, self)._auto_init()
         self._sql_constraints += [
             ('number_uniq',
-             'unique(number, company_id, partner_id, journal_id, type)',
+             'unique(number, company_id, partner_id, journal_id)',
              'Invoice Number must be unique per Company!'),
         ]
         self._add_sql_constraints()
