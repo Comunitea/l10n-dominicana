@@ -168,7 +168,7 @@
                     <span t-if="o.company_id.zip" t-field="o.company_id.zip"/>, <br/>
                     <span t-if="o.company_id.country_id" t-field="o.company_id.country_id"/>
                     <br/>
-                    <strong>Fecha: </strong><span t-field="o.date_invoice"/>
+
                 </div>
 
                 <div class="pull-right col-xs-6 text-right" style="font-size:20px;">
@@ -185,6 +185,14 @@
                         <strong>Nota de Crédito</strong>
                     </div>
                     <strong>
+                        <span t-if="o.type in ['out_invoice', 'out_refund'] and (o.state != 'draft')">Número:</span>
+
+                    </strong>
+                    <span t-field="o.internal_sequence"/>
+                    <br/>
+                    <strong>Fecha: </strong><span t-field="o.date_invoice"/>
+                    <br/>
+                    <strong>
                         <span t-if="o.type in ['out_invoice', 'out_refund'] and (o.state != 'draft')">NCF:</span>
                         <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Factura Borrador</span>
                         <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Factura Cancelada</span>
@@ -195,7 +203,7 @@
                     <strong><span t-if="o.type == 'out_refund' and (o.origin != False)">NCF modificado:</span></strong>
                     <span t-if="o.type == 'out_refund' and (o.origin != False)" t-field="o.origin"/>
                     <br t-if="o.type == 'out_refund' and (o.origin != False)"/>
-                    <strong><span t-if="o.type in ['out_invoice', 'out_refund'] and (o.state != 'draft')">Válida hasta:</span></strong>
+                    <strong><span t-if="o.type in ['out_invoice', 'out_refund'] and (o.state != 'draft')">Vencimiento secuencia:</span></strong>
                     <span t-if="o.type in ['out_invoice', 'out_refund'] and (o.state != 'draft')" t-field="o.ncf_expiration_date"/>
                 </div>
 
@@ -231,9 +239,9 @@
                 <thead>
                     <tr>
                         <th class="hidden">Origen</th>
+                        <th>Descripción</th>
                         <th class="text-right">Cantidad</th>
                         <th class="text-right">Precio</th>
-                        <th>Descripción</th>
                         <th t-if="display_discount" class="text-right">Desc.</th>
                         <th class="text-right">Impuestos</th>
                         <th class="text-right">ITBIS</th>
@@ -250,14 +258,15 @@
                         <td class="hidden">
                             <span t-field="l.origin"/>
                         </td>
+
+                        <td>
+                            <span t-field="l.name"/>
+                        </td>
                         <td class="text-right">
                             <span t-field="l.quantity"/>
                         </td>
                         <td class="text-right">
                             <span t-field="l.price_unit"/>
-                        </td>
-                        <td>
-                            <span t-field="l.name"/>
                         </td>
                         <td t-if="display_discount" class="text-right">
                             <span t-field="l.discount"/>
