@@ -159,10 +159,10 @@
             <div class="row">
 
                 <div name="dgii_invoice_address" class="col-xs-5">
-                    <h3><span t-field="o.company_id.name"/><br/></h3>
+                    <h4><span t-field="o.company_id.name"/><br/></h4>
                     <strong>RNC: </strong><span t-field="o.company_id.vat"/><br/>
                     <span t-if="o.company_id.street" t-field="o.company_id.street"/><br/>
-                    <span t-if="o.company_id.street2" t-field="o.company_id.street2"/><br/>
+                    <!--span t-if="o.company_id.street2" t-field="o.company_id.street2"/><br/-->
                     <span t-if="o.company_id.city" t-field="o.company_id.city"/>,
                     <span t-if="o.company_id.state_id" t-field="o.company_id.state_id"/>,
                     <span t-if="o.company_id.zip" t-field="o.company_id.zip"/>, <br/>
@@ -171,7 +171,7 @@
 
                 </div>
 
-                <div class="pull-right col-xs-6 text-right" style="font-size:20px;">
+                <div class="pull-right col-xs-5 text-right">
                     <div t-if="(o.state == 'open' or o.state == 'paid') and (o.type == 'out_invoice') and (o.sale_fiscal_type != 'gov')">
                         <strong>Factura de
                             <span t-if="o.sale_fiscal_type == 'fiscal'">Crédito Fiscal</span>
@@ -218,8 +218,11 @@
                     <strong>RNC CLIENTE:</strong>
                     <span t-field="o.partner_id.vat"/>
                     <br/>
-                    <strong>NOMBRE O RAZÓN SOCIAL:</strong>
-                    <span t-field="o.partner_id.name"/>
+
+                    <address t-field="o.partner_id"
+                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                    <!--strong>NOMBRE O RAZÓN SOCIAL:</strong>
+                    <span t-field="o.partner_id.name"/-->
 
                 </div>
             </div>
